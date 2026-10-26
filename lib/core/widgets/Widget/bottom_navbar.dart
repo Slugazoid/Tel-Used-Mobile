@@ -19,8 +19,7 @@ class NavItem {
   });
 }
 
-/// Urutan item HARUS sama dengan urutan branch di lib/app/router.dart.
-/// Cek nama ikon lewat autocomplete (ketik `LucideIcons.`) kalau ada yang merah.
+//list tab yang muncul di bottom bar, urutannya sesuai index tab.
 const List<NavItem> navItems = [
   NavItem(
     title: 'Home',
@@ -45,9 +44,6 @@ const List<NavItem> navItems = [
   ),
 ];
 
-/// Kerangka halaman yang punya bottom bar.
-/// Tab aktif ditentukan oleh route (navigationShell.currentIndex),
-/// bukan lagi oleh variabel setState.
 class MainShell extends StatelessWidget {
   const MainShell({super.key, required this.navigationShell});
 
@@ -114,7 +110,7 @@ class AppBottomBar extends StatelessWidget {
                     children: [
                       // Garis indikator di atas, hanya melebar saat dipilih.
                       AnimatedContainer(
-                        duration: const Duration(milliseconds: 150),
+                        duration: const Duration(milliseconds: 100),
                         height: 4,
                         width: selected ? 40 : 0,
                         decoration: BoxDecoration(
@@ -147,7 +143,7 @@ class AppBottomBar extends StatelessWidget {
   }
 }
 
-/// Membungkus ikon dengan badge angka unread di pojok kanan atas.
+/// Widget pembungkus ikon tab yang menampilkan badge jumlah notifikasi belum dibaca.
 class _UnreadBadge extends StatelessWidget {
   const _UnreadBadge({required this.child});
 
@@ -164,11 +160,7 @@ class _UnreadBadge extends StatelessWidget {
           children: [
             child!,
             if (count > 0)
-              Positioned(
-                right: -10,
-                top: -6,
-                child: _BadgeCount(count: count),
-              ),
+              Positioned(right: -10, top: -6, child: _BadgeCount(count: count)),
           ],
         );
       },
@@ -176,6 +168,7 @@ class _UnreadBadge extends StatelessWidget {
   }
 }
 
+/// Widget untuk menampilkan badge jumlah notifikasi belum dibaca.
 class _BadgeCount extends StatelessWidget {
   const _BadgeCount({required this.count});
 
