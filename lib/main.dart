@@ -20,9 +20,11 @@ import 'package:flutter/material.dart';
 
 import 'app/route.dart';
 import 'core/widgets/Const/colors.dart';
+// import 'features/settings/ui/SettingsPage.dart';
 
 void main() => runApp(const MyApp());
 
+// ---------- With Router for real Use ----------
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -39,3 +41,21 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// // ---------- Per Page Testing ----------
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       theme: ThemeData(
+//         useMaterial3: true,
+//         colorScheme: ColorScheme.fromSeed(seedColor: kPrimaryColor),
+//         scaffoldBackgroundColor: const Color(0xFFF9F9F9),
+//       ),
+//       home: const SettingsPage(),
+//     );
+//   }
+// }

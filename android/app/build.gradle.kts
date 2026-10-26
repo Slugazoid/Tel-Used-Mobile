@@ -7,7 +7,8 @@ plugins {
 android {
     namespace = "com.example.tel_used_mobile"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    // Pakai NDK yang sudah terpasang; flutter.ndkVersion (28.2.x) gagal diunduh otomatis.
+    ndkVersion = "30.0.16248370"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
