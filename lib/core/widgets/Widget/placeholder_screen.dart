@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Halaman sementara. Ganti dengan halaman asli di lib/features/...
+//halaman placeholder untuk sementara, nanti diganti dengan halaman asli.
 class PlaceholderScreen extends StatelessWidget {
   const PlaceholderScreen({
     super.key,
