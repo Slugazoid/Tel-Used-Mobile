@@ -6,6 +6,8 @@ import '../core/widgets/State/notification_state.dart';
 import '../core/widgets/Widget/app_top_bar.dart';
 import '../core/widgets/Widget/bottom_navbar.dart';
 import '../core/widgets/Widget/placeholder_screen.dart';
+import '../features/profile/ui/ProfilePage.dart';
+import '../features/settings/ui/SettingsPage.dart';
 
 import '../features/auth/ui/LoginPage.dart';
 import '../features/auth/ui/RegisterPage.dart';
@@ -123,18 +125,7 @@ final GoRouter appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/profile',
-              builder: (context, state) => PlaceholderScreen(
-                title: 'Profile',
-                appBar: AppTopBar.withActions(
-                  title: 'Profile',
-                  actions: [
-                    AppTopBar.action(
-                      icon: LucideIcons.settings,
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
+              builder: (context, state) => const ProfilePage(),
             ),
           ],
         ),
@@ -153,6 +144,10 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsPage(),
     ),
     GoRoute(
       path: '/chat/:id',
