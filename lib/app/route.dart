@@ -9,6 +9,10 @@ import '../core/widgets/Widget/placeholder_screen.dart';
 import '../features/profile/ui/ProfilePage.dart';
 import '../features/settings/ui/SettingsPage.dart';
 
+import '../features/auth/ui/LoginPage.dart';
+import '../features/auth/ui/RegisterPage.dart';
+import '../features/auth/ui/SplashPage.dart';
+
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 /// Aturan sederhana untuk bottom bar:
@@ -21,8 +25,9 @@ final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 /// /home/product/:id) tapi tidak boleh punya bottom bar, tambahkan
 /// `parentNavigatorKey: _rootNavigatorKey`.
 final GoRouter appRouter = GoRouter(
+  debugLogDiagnostics: true,
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/home',
+  initialLocation: '/splash',
   routes: [
     // ---------- Halaman DENGAN bottom bar ----------
     StatefulShellRoute.indexedStack(
@@ -129,33 +134,16 @@ final GoRouter appRouter = GoRouter(
 
     // ---------- Halaman TANPA bottom bar ----------
     GoRoute(
+      path: '/splash',
+      builder: (context, state) => const SplashPage(),
+    ),
+    GoRoute(
       path: '/login',
-      builder: (context, state) => PlaceholderScreen(
-        title: 'Login',
-        children: [
-          ElevatedButton(
-            onPressed: () => context.go('/home'),
-            child: const Text('Masuk'),
-          ),
-          TextButton(
-            onPressed: () => context.push('/register'),
-            child: const Text('Belum punya akun? Daftar'),
-          ),
-        ],
-      ),
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: '/register',
-      builder: (context, state) => PlaceholderScreen(
-        title: 'Register',
-        appBar: const AppTopBar.withBack(title: 'Daftar'),
-        children: [
-          ElevatedButton(
-            onPressed: () => context.go('/home'),
-            child: const Text('Daftar'),
-          ),
-        ],
-      ),
+      builder: (context, state) => const RegisterPage(),
     ),
     GoRoute(
       path: '/settings',
