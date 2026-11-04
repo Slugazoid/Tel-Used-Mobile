@@ -17,3 +17,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - lib/features/chat/data/avatar1.png
+    - lib/features/chat/data/avatar2.png
