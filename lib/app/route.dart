@@ -13,6 +13,8 @@ import '../features/auth/ui/LoginPage.dart';
 import '../features/auth/ui/RegisterPage.dart';
 import '../features/auth/ui/SplashPage.dart';
 
+import '../features/product/ui/product_detail_page.dart';
+
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 /// Aturan sederhana untuk bottom bar:
