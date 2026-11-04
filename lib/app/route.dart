@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
 
-import '../core/widgets/State/notification_state.dart';
-import '../core/widgets/Widget/app_top_bar.dart';
 import '../core/widgets/Widget/bottom_navbar.dart';
-import '../core/widgets/Widget/placeholder_screen.dart';
+import '../features/home/ui/HomePage.dart';
 import '../features/profile/ui/ProfilePage.dart';
 import '../features/settings/ui/SettingsPage.dart';
 
@@ -15,6 +12,12 @@ import '../features/auth/ui/SplashPage.dart';
 import '../features/auth/ui/SetupProfilePage.dart';
 
 import '../features/product/ui/product_detail_page.dart';
+import '../features/search/ui/SearchPage.dart';
+import '../features/filter/ui/FilterPage.dart';
+import '../features/chat/ui/ChatListPage.dart';
+import '../features/chat/ui/ChatRoomPage.dart';
+import '../features/timeline/ui/TimelinePage.dart';
+import '../features/notification/ui/NotificationPage.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -42,38 +45,13 @@ final GoRouter appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/home',
-              builder: (context, state) => PlaceholderScreen(
-                title: 'Home',
-                children: [
-                  ElevatedButton(
-                    onPressed: () => context.push('/home/product/1'),
-                    child: const Text('Buka Detail Produk (bar hilang)'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => context.push('/chat/1'),
-                    child: const Text('Buka Chat (bar hilang)'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => context.push('/login'),
-                    child: const Text('Buka Login (bar hilang)'),
-                  ),
-                ],
-              ),
+              builder: (context, state) => const HomePage(),
               routes: [
                 GoRoute(
                   path: 'product/:id',
-                  parentNavigatorKey: _rootNavigatorKey, // sembunyikan bar
-                  builder: (context, state) => PlaceholderScreen(
-                    title: 'Detail Produk #${state.pathParameters['id']}',
-                    appBar: AppTopBar.withBack(
-                      title: 'Detail Produk',
-                      actions: [
-                        AppTopBar.action(
-                          icon: LucideIcons.shoppingCart,
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
+                  parentNavigatorKey: _rootNavigatorKey,
+                  builder: (context, state) => ProductDetailPage(
+                    id: int.parse(state.pathParameters['id']!),
                   ),
                 ),
               ],
@@ -86,10 +64,7 @@ final GoRouter appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/timeline',
-              builder: (context, state) => const PlaceholderScreen(
-                title: 'Timeline',
-                appBar: AppTopBar(title: 'Timeline'),
-              ),
+              builder: (context, state) => const TimelinePage(),
             ),
           ],
         ),
@@ -99,26 +74,7 @@ final GoRouter appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/notifications',
-              builder: (context, state) => PlaceholderScreen(
-                title: 'Notification',
-                appBar: const AppTopBar(title: 'Notification'),
-                children: [
-                  ValueListenableBuilder<int>(
-                    valueListenable: unreadNotifications,
-                    builder: (context, count, _) =>
-                        Text('Belum dibaca: $count'),
-                  ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => unreadNotifications.value = 0,
-                    child: const Text('Tandai semua dibaca'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => unreadNotifications.value += 1,
-                    child: const Text('Simulasi notifikasi baru'),
-                  ),
-                ],
-              ),
+              builder: (context, state) => const NotificationPage(),
             ),
           ],
         ),
@@ -153,20 +109,25 @@ final GoRouter appRouter = GoRouter(
      builder: (context, state) => const SetupProfilePage(),
    ),
     GoRoute(
+      path: '/search',
+      builder: (context, state) => const SearchPage(),
+    ),
+    GoRoute(
+      path: '/filter',
+      builder: (context, state) => const FilterPage(),
+    ),
+    GoRoute(
       path: '/settings',
       builder: (context, state) => const SettingsPage(),
     ),
     GoRoute(
+      path: '/chat',
+      builder: (context, state) => const ChatListPage(),
+    ),
+    GoRoute(
       path: '/chat/:id',
-      builder: (context, state) => PlaceholderScreen(
-        title: 'Chat #${state.pathParameters['id']}',
-        appBar: AppTopBar.withBack(
-          title: 'Chat',
-          actions: [
-            AppTopBar.action(icon: LucideIcons.search, onPressed: () {}),
-          ],
-        ),
-      ),
+      builder: (context, state) =>
+          ChatRoomPage(id: state.pathParameters['id']!),
     ),
   ],
 );

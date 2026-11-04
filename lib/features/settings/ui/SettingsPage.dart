@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/widgets/Const/colors.dart';
@@ -8,8 +9,9 @@ class _SettingItem {
   final IconData icon;
   final String title;
   final String subtitle;
+  final String? route; // halaman tujuan (null = belum ada)
 
-  const _SettingItem(this.icon, this.title, this.subtitle);
+  const _SettingItem(this.icon, this.title, this.subtitle, [this.route]);
 }
 
 const _items = [
@@ -97,7 +99,7 @@ class _SettingTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: item.route == null ? null : () => context.push(item.route!),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),
         child: Row(

@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^18.1.1
+  http: ^1.6.0
   image_picker: ^1.2.4
   lucide_icons_flutter: ^4.0.1
 

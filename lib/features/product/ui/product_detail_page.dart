@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tel_used_mobile/features/home/data/home.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  const ProductDetailPage({super.key});
+  final int id;
+  const ProductDetailPage({super.key, required this.id});
 
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
@@ -12,21 +15,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   bool _isWishlisted = false;
   final PageController _pageController = PageController();
 
-  // Mock Data presisi sesuai screenshot Figma
+  Product? product;
+  bool isLoading = true;
+
+    // Mock data: field yang tidak ada di dummyjson.
   final Map<String, dynamic> productData = {
-    "images": [
-      "https://picsum.photos/400/400?random=10",
-      "https://picsum.photos/400/400?random=11",
-      "https://picsum.photos/400/400?random=12",
-    ],
-    "title": "Sepatu putih platform shoes",
     "size": "Ukuran 41",
     "condition": "Kondisi sempurna",
-    "price": 200000,
     "inCartCount": 3,
     "bidCount": 3,
-    "description": "Nike putih. Cuman pernah dipake 3 kali dan masih bersih.",
-    "hashtags": ["#sneakers"],
     "colorName": "Putih",
     "uploadedTime": "DI UNGGAH 3 HARI YANG LALU",
     "seller": {
@@ -50,11 +47,30 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         "category": "Sepatu",
         "imageUrl": "https://picsum.photos/200/200?random=22",
       },
-    ]
+    ],
   };
 
   @override
+  void initState() {
+    super.initState();
+    loadProduct();
+  }
+
+  void loadProduct() async {
+    final result = await fetchProductById(widget.id);
+    setState(() {
+      product = result;
+      isLoading = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if(isLoading){
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
     const primaryRed = Color(0xFFE53935);
 
     return Scaffold(
@@ -170,7 +186,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   // Carousel Foto Produk & Indikator Titik
   Widget _buildImageCarousel(Color primaryRed) {
-    final List<String> images = List<String>.from(productData["images"]);
+    final List<String> images = List<String>.from(product!.images);
 
     return Stack(
       children: [
@@ -276,7 +292,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             children: [
               Expanded(
                 child: Text(
-                  productData["title"],
+                  product!.title,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -301,7 +317,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
           const SizedBox(height: 12),
           Text(
-            "Rp${productData['price'].toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (m) => '${m[1]}.')}",
+            "\$${product!.price}",
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -384,12 +400,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            productData["description"],
+            product!.description,
             style: const TextStyle(fontSize: 13, height: 1.4, color: Colors.black87),
           ),
           const SizedBox(height: 12),
           Text(
-            productData["hashtags"].join(" "),
+            '#${product!.category}',
             style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black87),
           ),
           const SizedBox(height: 14),
@@ -473,7 +489,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    // Routing ke T-10 (Chat Penjual)
+                    context.push('/chat/1'); // id 1 = kopiaren22 (mock)
                   },
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: Color(0xFFEF4444)),

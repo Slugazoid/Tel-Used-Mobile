@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 import '../../../core/widgets/Const/colors.dart';
+import '../../../core/widgets/Widget/add_fab.dart';
+import '../../../core/widgets/Widget/underline_tabs.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -13,7 +15,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   static const _tabs = ['Semua Barang', 'Favorites', 'Reviews'];
-  static const _grey = Color(0xFF8A8A8A);
   static const _border = Color(0xFFD9D9D9);
 
   // Sesuai Figma: tab Reviews yang sedang aktif.
@@ -23,13 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: kPrimaryColor,
-        foregroundColor: Colors.white,
-        shape: const CircleBorder(),
-        child: const Icon(LucideIcons.plus, size: 28),
-      ),
+      floatingActionButton: const AddFab(),
       body: SafeArea(
         child: Column(
           children: [
@@ -66,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(height: 2),
-                    Text('@arz6uuu', style: TextStyle(color: _grey)),
+                    Text('@arz6uuu', style: TextStyle(color: kGreyColor)),
                   ],
                 ),
               ),
@@ -118,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return OutlinedButton(
       onPressed: () {},
       style: OutlinedButton.styleFrom(
-        foregroundColor: _grey,
+        foregroundColor: kGreyColor,
         side: const BorderSide(color: _border),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -141,35 +136,10 @@ class _ProfilePageState extends State<ProfilePage> {
       decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: Color(0xFFEEEEEE))),
       ),
-      child: Row(
-        children: List.generate(_tabs.length, (i) {
-          final selected = i == _tabIndex;
-          return Expanded(
-            child: InkWell(
-              onTap: () => setState(() => _tabIndex = i),
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: selected ? kPrimaryColor : Colors.transparent,
-                      width: 2,
-                    ),
-                  ),
-                ),
-                child: Text(
-                  _tabs[i],
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: selected ? kPrimaryColor : _grey,
-                    fontWeight: selected ? FontWeight.w600 : FontWeight.normal,
-                  ),
-                ),
-              ),
-            ),
-          );
-        }),
+      child: UnderlineTabs(
+        labels: _tabs,
+        selectedIndex: _tabIndex,
+        onChanged: (i) => setState(() => _tabIndex = i),
       ),
     );
   }
@@ -194,11 +164,11 @@ class _ProfilePageState extends State<ProfilePage> {
           _chip(
             child: const Text(
               'Sort by',
-              style: TextStyle(fontSize: 13, color: _grey),
+              style: TextStyle(fontSize: 13, color: kGreyColor),
             ),
           ),
           const Spacer(),
-          const Icon(LucideIcons.layoutGrid, size: 22, color: _grey),
+          const Icon(LucideIcons.layoutGrid, size: 22, color: kGreyColor),
         ],
       ),
     );
