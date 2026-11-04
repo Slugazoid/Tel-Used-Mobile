@@ -12,6 +12,9 @@ import '../features/settings/ui/SettingsPage.dart';
 import '../features/auth/ui/LoginPage.dart';
 import '../features/auth/ui/RegisterPage.dart';
 import '../features/auth/ui/SplashPage.dart';
+import '../features/auth/ui/SetupProfilePage.dart';
+
+import '../features/product/ui/product_detail_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -145,6 +148,10 @@ final GoRouter appRouter = GoRouter(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
     ),
+       GoRoute(
+     path: '/setup-profile',
+     builder: (context, state) => const SetupProfilePage(),
+   ),
     GoRoute(
       path: '/settings',
       builder: (context, state) => const SettingsPage(),
