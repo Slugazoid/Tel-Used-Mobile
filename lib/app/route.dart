@@ -10,6 +10,7 @@ import '../core/widgets/Widget/placeholder_screen.dart';
 import '../features/auth/ui/LoginPage.dart';
 import '../features/auth/ui/RegisterPage.dart';
 import '../features/auth/ui/SplashPage.dart';
+import '../features/auth/ui/SetupProfilePage.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -154,6 +155,10 @@ final GoRouter appRouter = GoRouter(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
     ),
+       GoRoute(
+     path: '/setup-profile',
+     builder: (context, state) => const SetupProfilePage(),
+   ),
     GoRoute(
       path: '/chat/:id',
       builder: (context, state) => PlaceholderScreen(

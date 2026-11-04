@@ -100,7 +100,6 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(
               child: AuthOutlineButton(
                 onPressed: () {
-                  // TODO: login Google
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -116,7 +115,6 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(
               child: AuthOutlineButton(
                 onPressed: () {
-                  // TODO: login Apple
                 },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
