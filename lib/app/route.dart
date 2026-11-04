@@ -11,6 +11,7 @@ import '../features/auth/ui/LoginPage.dart';
 import '../features/auth/ui/RegisterPage.dart';
 import '../features/auth/ui/SplashPage.dart';
 import '../features/auth/ui/SetupProfilePage.dart';
+import '../features/auth/ui/OnboardingPage.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -143,22 +144,20 @@ final GoRouter appRouter = GoRouter(
     ),
 
     // ---------- Halaman TANPA bottom bar ----------
+    GoRoute(path: '/splash', builder: (context, state) => const SplashPage()),
     GoRoute(
-      path: '/splash',
-      builder: (context, state) => const SplashPage(),
+      path: '/onboarding',
+      builder: (context, state) => const OnboardingPage(),
     ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginPage(),
-    ),
+    GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
     GoRoute(
       path: '/register',
       builder: (context, state) => const RegisterPage(),
     ),
-       GoRoute(
-     path: '/setup-profile',
-     builder: (context, state) => const SetupProfilePage(),
-   ),
+    GoRoute(
+      path: '/setup-profile',
+      builder: (context, state) => const SetupProfilePage(),
+    ),
     GoRoute(
       path: '/chat/:id',
       builder: (context, state) => PlaceholderScreen(

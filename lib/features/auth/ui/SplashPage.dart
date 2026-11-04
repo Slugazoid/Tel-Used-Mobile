@@ -22,9 +22,9 @@ class _SplashPageState extends State<SplashPage> {
       if (mounted) setState(() => _isLight = true);
     });
 
-    // Setelah 2,4 detik: pindah ke Login
+    // Setelah 2,4 detik: pindah ke Onboarding
     Future.delayed(const Duration(milliseconds: 2400), () {
-      if (mounted) context.go('/login');
+      if (mounted) context.go('/onboarding');;
     });
   }
 
