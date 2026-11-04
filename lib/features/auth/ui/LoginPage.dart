@@ -16,9 +16,6 @@ class _LoginPageState extends State<LoginPage> {
 
   String? _error; // null = tidak ada error
 
-  // Password dummy untuk demo. Nanti ganti dengan panggilan API.
-  static const _dummyPassword = '12345678';
-
   @override
   void dispose() {
     _userController.dispose();
@@ -27,20 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() {
-    final user = _userController.text.trim();
-    final pass = _passController.text;
-
-    if (user.isEmpty || pass.isEmpty) {
-      setState(() => _error = 'Please fill in all fields.');
-      return;
-    }
-
-    // TODO: ganti dengan login ke server
-    if (pass != _dummyPassword) {
-      setState(() => _error = 'Incorrect password.');
-      return;
-    }
-
     context.go('/home');
   }
 

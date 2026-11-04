@@ -72,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               IconButton(
                 onPressed: () => context.push('/settings'),
-                icon: const Icon(LucideIcons.menu, size: 24),
+                icon: const Icon(LucideIcons.settings, size: 24),
               ),
             ],
           ),
